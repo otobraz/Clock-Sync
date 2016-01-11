@@ -74,14 +74,14 @@ public class ClientHandler extends Thread{
 				numberOfMessages = 0;
 				message = getNetMessageFromQueue();
 				long newTime = clientInfo.getTime() + Long.parseLong(message);
-				Runtime.getRuntime().exec("cmd /C time " + newTime);
 				Date date = new Date(newTime);
-				sendMessageToClient("Clock adjusted to: " + date.toString());
+				Runtime.getRuntime().exec("date -s " + date);
+				sendMessageToClient("Clock adjusted to: " + date);
 			}	
 		}else{
 			long newTime = clientInfo.getTime() + Long.parseLong(message);
-			Runtime.getRuntime().exec("cmd /C time " + newTime);
 			Date date = new Date(newTime);
+			Runtime.getRuntime().exec("date -s " + date);		
 			sendMessageToClient("Clock adjusted to: " + date.toString());
 		}
 	}

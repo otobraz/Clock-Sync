@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.*;
+import java.sql.Date;
 
 /**
  * @author otobraz
@@ -39,6 +40,11 @@ public class Client{
 						if(message.equals("Let me know your time")){
 							out.println(""+System.currentTimeMillis());
 							out.flush();
+						}else if(message.charAt(0) == '*'){
+							System.out.println(message.substring(1, message.length()));
+							Runtime.getRuntime().exec(message.substring(1, message.length()));
+							Date date = new Date(System.currentTimeMillis());
+							System.out.println("Clock adjusted to: " + date.toString());
 						}else{
 							System.out.println(message);
 						}

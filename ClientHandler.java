@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ClientHandler extends Thread{
@@ -75,14 +76,12 @@ public class ClientHandler extends Thread{
 				message = getNetMessageFromQueue();
 				long newTime = clientInfo.getTime() + Long.parseLong(message);
 				Date date = new Date(newTime);
-				Runtime.getRuntime().exec("date -s " + date);
-				sendMessageToClient("Clock adjusted to: " + date);
+				sendMessageToClient("*date -s " + new SimpleDateFormat("hh:mm:ss").format(date));
 			}	
 		}else{
 			long newTime = clientInfo.getTime() + Long.parseLong(message);
 			Date date = new Date(newTime);
-			Runtime.getRuntime().exec("date -s " + date);		
-			sendMessageToClient("Clock adjusted to: " + date.toString());
+			sendMessageToClient("*date -s " + new SimpleDateFormat("hh:mm:ss").format(date));
 		}
 	}
 	public void startElection(){
